@@ -1,33 +1,40 @@
+import static org.junit.Assert.*;
+import org.junit.Test;
 
-/**
- * Write a description of class Test here.
- *
- * @author (your name)
- * @version (a version number or a date)
- */
 public class CommentTest
 {
-    // instance variables - replace the example below with your own
-    private int x;
-
-    /**
-     * Constructor for objects of class Test
-     */
-    public CommentTest()
+    @Test
+    public void testAuthorAndRating()
     {
-        // initialise instance variables
-        x = 0;
+        Comment comment = new Comment("Alice", "Great!", 4);
+        assertEquals("Alice", comment.getAuthor());
+        assertEquals(4, comment.getRating());
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-    public int sampleMethod(int y)
+    @Test
+    public void testUpvote()
     {
-        // put your code here
-        return x + y;
+        Comment comment = new Comment("Bob", "Nice!", 5);  
+        comment.upvote();
+        comment.upvote();
+        assertEquals(2, comment.getVoteCount());
+    }
+
+    @Test
+    public void testDownvote()
+    {
+        Comment comment = new Comment("Charlie", "Not great", 2); 
+        comment.downvote();
+        assertEquals(-1, comment.getVoteCount());
+    }
+    
+    @Test
+    public void testUpvoteAndDownvoteBalance()
+    {
+        Comment comment = new Comment("Jane", "Average", 3);
+        comment.upvote();
+        comment.upvote();
+        comment.downvote();
+        assertEquals(1, comment.getVoteCount());
     }
 }
