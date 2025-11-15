@@ -69,4 +69,19 @@ public class SalesItemTest
         assertEquals("test name", salesIte1.getName());
         assertEquals(1000, salesIte1.getPrice());
     }
+    
+    public void testDuplicateAuthorComment()
+    {
+        SalesItem item = new SalesItem("The Alchemist", 1200);
+        assertEquals(true, item.addComment("Kathy", "A classic.", 5));
+        assertEquals(false, item.addComment("Kathy", "The storytelling blew my mind!", 5));
+    }
+    
+    @Test
+    public void testRatingBoundaries()
+    {
+        SalesItem item = new SalesItem("Breakfast at Tiffany's", 1000);
+        assertEquals(false, item.addComment("John", "Hated it", 0));
+        assertEquals(false, item.addComment("Maria", "Loved it", 6));
+    }
 }
